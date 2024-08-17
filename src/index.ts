@@ -20,14 +20,16 @@ async function createUsersTable() {
 
 async function insertDataInTable() {
   await client.connect();
-  const result = await client.query(`
-      INSERT INTO users (
-        id, username, email, password, created_at
-      )
-      VALUES (
-        '1', 'aakash25', 'a@gmail.com', 'helloWorld', '2024-08-17 14:30:00+00'
-      )
-  `);
+  const query =
+    "INSERT INTO users (id, username, email, password, created_at) VALUES ($1, $2, $3, $4, $5)";
+  const values = [
+    "2",
+    "aakash25",
+    "a@gmail.com",
+    "helloWorld",
+    "2024-08-17 14:30:00+00",
+  ];
+  const result = await client.query(query, values);
   console.log(result);
 }
 
@@ -53,4 +55,4 @@ async function getaUser(email: string) {
   }
 }
 
-getaUser("aa@gmail.com");
+insertDataInTable();
